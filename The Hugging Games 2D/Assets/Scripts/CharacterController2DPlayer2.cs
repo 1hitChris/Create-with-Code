@@ -18,6 +18,8 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	private AudioSource playerAudio;
+	public AudioClip jumpSound;
 
 	[Header("Events")]
 	[Space]
@@ -29,6 +31,11 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+
+	void Start()
+    {
+		playerAudio = GetComponent<AudioSource>();
+	}
 
 	private void Awake()
 	{
@@ -129,6 +136,7 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			playerAudio.PlayOneShot(jumpSound, 1.0f);
 		}
 	}
 
@@ -138,9 +146,6 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+		transform.Rotate(0, 180, 0);
 	}
 }

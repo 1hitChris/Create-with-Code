@@ -121,8 +121,8 @@ InputManager:
     m_Name: JumpP2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: right shift
-    positiveButton: 
+    negativeButton: 
+    positiveButton: up
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

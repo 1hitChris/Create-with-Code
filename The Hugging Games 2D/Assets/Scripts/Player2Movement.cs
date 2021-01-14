@@ -24,15 +24,14 @@ public class Player2Movement : MonoBehaviour
         if (Input.GetButtonDown("JumpP2"))
         {
             jump = true;
-            animator.SetBool("IsJumping", true);
-            Debug.Log("Jump");
+            animator.SetBool("isJump", true);
         }
     }
 
-    //Bool for checking if character is jumping or not. For animation purpose
+    //Bool for checking if character has landed on ground. For animation purpose
     public void OnLanding()
     {
-        animator.SetBool("IsJumping", false);
+        animator.SetBool("isJump", false);
     }
 
     void FixedUpdate()

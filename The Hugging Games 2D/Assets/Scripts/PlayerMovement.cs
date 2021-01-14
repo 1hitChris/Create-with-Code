@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Get player movement
-       horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
