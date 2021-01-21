@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class HeartPickUp : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
-        
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        GameObject spawnManager = GameObject.Find("SpawnManager");
-        SpawnManager spawnManagerScript = spawnManager.GetComponent<SpawnManager>();
-        spawnManagerScript.hearts--;
-        Destroy(gameObject);
-        spawnManagerScript.maxHearts++;
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            HeartThrow heartThrowScript = other.gameObject.GetComponent<HeartThrow>();
+            
+            if (heartThrowScript.currentHearts == heartThrowScript.maxHearts)
+            {
+                return;
+            }
+            else if (heartThrowScript.currentHearts < heartThrowScript.maxHearts)
+            {
+                heartThrowScript.currentHearts++;
+                Destroy(gameObject);
+            }
+        }
     }
 }

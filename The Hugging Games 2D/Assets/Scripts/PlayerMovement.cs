@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     
     public float speed = 10.0f;
-
+    public float boundary = 6.2f;
     float horizontalMove = 0f;
     bool jump = false;
 
@@ -19,6 +19,16 @@ public class PlayerMovement : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
+        if (transform.position.x < -boundary)
+        {
+            transform.position = new Vector3(-boundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x > boundary)
+        {
+            transform.position = new Vector3(boundary, transform.position.y, transform.position.z);
+        }
 
         // Check if Jump button is pushed down and if it is, execute
         if (Input.GetButtonDown("Jump"))

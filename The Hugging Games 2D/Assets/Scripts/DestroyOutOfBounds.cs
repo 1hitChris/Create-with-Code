@@ -17,11 +17,7 @@ public class DestroyOutOfBounds : MonoBehaviour
     {
 
         // If an object goes past the players view in the game, remove that object
-        if (transform.position.x > xBounds)
-        {
-            Destroy(gameObject);
-        }
-        else if (transform.position.x < xBounds)
+        if (transform.position.x == xBounds || transform.position.x == -xBounds)
         {
             Destroy(gameObject);
         }

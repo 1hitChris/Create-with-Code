@@ -9,12 +9,22 @@ public class heart : MonoBehaviour
     public Rigidbody2D rb;
     public AudioSource damageSource;
     public AudioClip damageSound;
+    public float xBounds = 10.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * speed;
         damageSource = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        // If an object goes past the players view in the game, remove that object
+        if (transform.position.x > xBounds || transform.position.x < -xBounds)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)

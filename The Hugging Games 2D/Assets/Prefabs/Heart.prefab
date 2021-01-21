@@ -147,6 +147,7 @@ MonoBehaviour:
   rb: {fileID: 3043481564876671205}
   damageSource: {fileID: 0}
   damageSound: {fileID: 8300000, guid: 3da838a31817c54459f005726e96a0f0, type: 3}
+  xBounds: 10
 --- !u!82 &82840130159202836
 AudioSource:
   m_ObjectHideFlags: 0
