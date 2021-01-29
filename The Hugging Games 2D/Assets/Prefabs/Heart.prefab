@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 906406501308623975}
   - component: {fileID: 906406501308623970}
   - component: {fileID: 3043481564876671205}
-  - component: {fileID: 114770001992247708}
   - component: {fileID: 82840130159202836}
+  - component: {fileID: 3851135774457985243}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Heart
@@ -130,24 +130,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &114770001992247708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 906406501308623974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213594e3c61ffa240885febb22366782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  damage: 1
-  rb: {fileID: 3043481564876671205}
-  damageSource: {fileID: 0}
-  damageSound: {fileID: 8300000, guid: 3da838a31817c54459f005726e96a0f0, type: 3}
-  xBounds: 10
 --- !u!82 &82840130159202836
 AudioSource:
   m_ObjectHideFlags: 0
@@ -244,3 +226,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3851135774457985243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906406501308623974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213594e3c61ffa240885febb22366782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  damage: 1
+  rb: {fileID: 3043481564876671205}
+  damageSource: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: 3da838a31817c54459f005726e96a0f0, type: 3}
+  xBounds: 10

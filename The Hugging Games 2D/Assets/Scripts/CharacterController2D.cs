@@ -20,6 +20,7 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
 	private AudioSource playerAudio;
 	public AudioClip jumpSound;
+	public float hugForce = 500.0f;
 
 	[Header("Events")]
 	[Space]
@@ -80,6 +81,7 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 
+
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
@@ -138,6 +140,22 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 			playerAudio.PlayOneShot(jumpSound, 1.0f);
 		}
+
+        if (move > 0 || move < 0 && m_FacingRight)
+        {
+			if (Input.GetButtonDown("Hug1"))
+			{
+				m_Rigidbody2D.AddForce(new Vector2(hugForce, 0f));
+			}
+		}
+        else if (move > 0 || move < 0 && !m_FacingRight)
+        {
+			if (Input.GetButtonDown("Hug1"))
+			{
+				m_Rigidbody2D.AddForce(new Vector2(-hugForce, 0f));
+			}
+		}
+		
 	}
 
 

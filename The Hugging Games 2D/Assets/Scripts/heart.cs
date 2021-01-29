@@ -29,14 +29,27 @@ public class heart : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
+        if (hitInfo.gameObject.CompareTag("Player"))
         {
-            enemy.TakeDamage(damage);
-            damageSource.PlayOneShot(damageSound, 1.0f);
+            PlayerOneHealth health = hitInfo.GetComponent<PlayerOneHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+                damageSource.PlayOneShot(damageSound, 1.0f);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if (hitInfo.gameObject.CompareTag("Player2"))
+        {
+            PlayerTwoHealth health = hitInfo.GetComponent<PlayerTwoHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+                damageSource.PlayOneShot(damageSound, 1.0f);
+            }
+            Destroy(gameObject);
+        }
+            
     }
 
 }

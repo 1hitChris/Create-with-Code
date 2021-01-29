@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class HeartPickUp : MonoBehaviour
 {
+    private AudioSource playerAudio;
+    public AudioClip pickUpSound;
     void Start()
     {
-        
+        playerAudio = GetComponent<AudioSource>();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,6 +22,7 @@ public class HeartPickUp : MonoBehaviour
             }
             else if (heartThrowScript.currentHearts < heartThrowScript.maxHearts)
             {
+                playerAudio.PlayOneShot(pickUpSound, 1.0f);
                 heartThrowScript.currentHearts++;
                 Destroy(gameObject);
             }

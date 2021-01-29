@@ -12,6 +12,11 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
 
+    void Awake()
+    {
+       
+    }
+
     // Update is called once per frame
     void Update()
     {

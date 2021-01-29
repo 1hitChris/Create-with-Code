@@ -26,7 +26,7 @@ public class HeartThrow : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("FireControllerButton"))
         {
             playerAudio.PlayOneShot(throwSound, 1.0f);
             Shoot();

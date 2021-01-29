@@ -6,10 +6,8 @@ public class Player2Movement : MonoBehaviour
 {
     public CharacterController2DPlayer2 controller;
     public Animator animator;
-
     public float speed = 30.0f;
     public float boundary = 6.2f;
-
     float horizontalMove = 0f;
     bool jump = false;
 
@@ -35,14 +33,14 @@ public class Player2Movement : MonoBehaviour
         if (Input.GetButtonDown("JumpP2"))
         {
             jump = true;
-            animator.SetBool("isJump", true);
+            animator.SetBool("IsJumping", true);
         }
     }
 
     //Bool for checking if character has landed on ground. For animation purpose
     public void OnLanding()
     {
-        animator.SetBool("isJump", false);
+        animator.SetBool("IsJumping", false);
     }
 
     void FixedUpdate()
