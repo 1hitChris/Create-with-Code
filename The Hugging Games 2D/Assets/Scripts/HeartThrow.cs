@@ -30,7 +30,7 @@ public class HeartThrow : MonoBehaviour
         {
             playerAudio.PlayOneShot(throwSound, 1.0f);
             Shoot();
-            StartCoroutine(AttackSpeed());
+            StartCoroutine(AttackSpeed(attackSpeed));
         }
     }
 
@@ -39,8 +39,9 @@ public class HeartThrow : MonoBehaviour
         Instantiate(heartPrefab, firePoint.position, firePoint.rotation);
         currentHearts--;
     }
-    IEnumerator AttackSpeed()
+    IEnumerator AttackSpeed(float attackSpeed)
     {
         yield return new WaitForSeconds(attackSpeed);
+
     }
 }

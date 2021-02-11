@@ -7,6 +7,7 @@ public class WinScript : MonoBehaviour
 {
     public GameObject player1Wins;
     public GameObject player2Wins;
+    private Pause continueGame;
     public void Player1Win()
     {
         player1Wins.SetActive(true);
@@ -28,6 +29,13 @@ public class WinScript : MonoBehaviour
     public void MainMenuButton()
     {
         SceneManager.LoadScene("Menu");
+        Time.timeScale = 1;
+    }
+
+    public void ContinueButton()
+    {
+        continueGame = GetComponent<Pause>();
+        continueGame.ContinueGame();
         Time.timeScale = 1;
     }
 }

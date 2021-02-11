@@ -7,7 +7,7 @@ public class Player2Movement : MonoBehaviour
     public CharacterController2DPlayer2 controller;
     public Animator animator;
     public float speed = 30.0f;
-    public float boundary = 6.2f;
+    public float boundary = 2f;
     float horizontalMove = 0f;
     bool jump = false;
 
@@ -17,7 +17,7 @@ public class Player2Movement : MonoBehaviour
         // Get player movement
         horizontalMove = Input.GetAxisRaw("HorizontalP2") * speed;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (transform.position.x < -boundary)
         {

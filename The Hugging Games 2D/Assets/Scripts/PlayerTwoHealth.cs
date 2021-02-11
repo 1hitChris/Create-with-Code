@@ -8,13 +8,13 @@ public class PlayerTwoHealth : MonoBehaviour
     public int startingAffection = 0;
     public int currentAffection;
     public int maxAffection = 10;
-    bool playerHug = false;
-    //public GameObject hugEffect;
     bool playerStunned = false;
     public int stunDuration = 3;
     public GameManager gameManager;
     public Healthbar healthBar;
     public GameObject heartBig;
+    private bool waiting = false;
+    public WinScript winScript;
 
     void Start()
     {
@@ -23,6 +23,13 @@ public class PlayerTwoHealth : MonoBehaviour
         heartBig = healthBarP2.transform.Find("HeartBig").gameObject;
         currentAffection = startingAffection;
         healthBar.SetMaxHealth(currentAffection);
+        GameObject win2 = GameObject.Find("GameManager");
+        winScript = win2.GetComponent<WinScript>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void TakeDamage(int damage)
@@ -37,11 +44,12 @@ public class PlayerTwoHealth : MonoBehaviour
             playerStunned = true;
             movement2.enabled = false;
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
             Debug.Log("Stunned");
             StartCoroutine("StunDuration");
             heartBig.SetActive(true);
-            Destroy(gameObject);
+           // StopTime(1.0f);
+           // Destroy(gameObject);
         }
     }
 
@@ -59,9 +67,44 @@ public class PlayerTwoHealth : MonoBehaviour
     IEnumerator StunDuration()
     {
         yield return new WaitForSeconds(stunDuration);
-        //movement.enabled = true;
         movement2.enabled = true;
         currentAffection = startingAffection;
-        healthBar.SetHealth(startingAffection);
+        healthBar.SetHealth(currentAffection);
+        heartBig.SetActive(false);
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerStunned = false;
+    }
+
+    public void StopTime(float duration)
+    {
+        if (waiting == true)
+        {
+            return;
+        }
+        Time.timeScale = 0.1f;
+        StartCoroutine(Wait(duration));
+    }
+
+    IEnumerator Wait(float duration)
+    {
+        waiting = true;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1.0f;
+        waiting = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (playerStunned)
+        {
+            Debug.Log("Hugged");
+            winScript.Player1Win();
+            //Play hug animation
+            //Zoom in
+            //Wait 2 seconds
+            //Win screen appear
+        }
     }
 }
+

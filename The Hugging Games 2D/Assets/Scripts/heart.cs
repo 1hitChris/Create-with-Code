@@ -10,6 +10,7 @@ public class heart : MonoBehaviour
     public AudioSource damageSource;
     public AudioClip damageSound;
     public float xBounds = 10.0f;
+    public float spin = 4f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,8 @@ public class heart : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        transform.Rotate(new Vector3(0,0,-720) * spin * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)

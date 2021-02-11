@@ -7,9 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
     
-    public float speed = 10.0f;
-    public float boundary = 6.2f;
+    public float speed = 30.0f;
+    public float boundary = 2f;
     float horizontalMove = 0f;
+    //float controllerMove = 0f;
     bool jump = false;
 
     void Awake()
@@ -22,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get player movement
         horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        //controllerMove = Input.GetAxisRaw("ControllerHorizontal") * speed;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        //animator.SetFloat("Speed", Mathf.Abs(controllerMove));
 
         if (transform.position.x < -boundary)
         {
@@ -53,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get the controller movement for character
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        //controller.Move(controllerMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
 }

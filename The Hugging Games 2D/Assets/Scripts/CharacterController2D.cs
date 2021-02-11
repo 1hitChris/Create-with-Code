@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -20,7 +22,9 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
 	private AudioSource playerAudio;
 	public AudioClip jumpSound;
-	public float hugForce = 500.0f;
+	public float hugForce = 200.0f;
+	public float hugCooldown = 2.0f;
+	public bool hugAvailable;
 
 	[Header("Events")]
 	[Space]
@@ -36,6 +40,7 @@ public class CharacterController2D : MonoBehaviour
 	void Start()
     {
 		playerAudio = GetComponent<AudioSource>();
+		hugAvailable = true;
 	}
 
 	private void Awake()
@@ -141,18 +146,25 @@ public class CharacterController2D : MonoBehaviour
 			playerAudio.PlayOneShot(jumpSound, 1.0f);
 		}
 
-        if (move > 0 || move < 0 && m_FacingRight)
+        if (move >= 0 || move <= 0 && m_FacingRight)
         {
-			if (Input.GetButtonDown("Hug1"))
+			if (Input.GetButtonDown("Hug1") && hugAvailable == true)
 			{
 				m_Rigidbody2D.AddForce(new Vector2(hugForce, 0f));
+				Debug.Log("Hug to the right");
+				hugAvailable = false;
+				StartCoroutine("HugCooldown");
+
 			}
 		}
-        else if (move > 0 || move < 0 && !m_FacingRight)
+        else if (move == 0 || move <= 0 && !m_FacingRight)
         {
-			if (Input.GetButtonDown("Hug1"))
+			if (Input.GetButtonDown("Hug1") && hugAvailable == true)
 			{
 				m_Rigidbody2D.AddForce(new Vector2(-hugForce, 0f));
+				Debug.Log("Hug to the left");
+				hugAvailable = false;
+				StartCoroutine("HugCooldown");
 			}
 		}
 		
@@ -166,4 +178,11 @@ public class CharacterController2D : MonoBehaviour
 
 		transform.Rotate(0, 180, 0);
 	}
+
+	IEnumerator HugCooldown()
+    {
+		yield return new WaitForSecondsRealtime(hugCooldown);
+		Debug.Log("Cooldown");
+		hugAvailable = true;
+    }
 }

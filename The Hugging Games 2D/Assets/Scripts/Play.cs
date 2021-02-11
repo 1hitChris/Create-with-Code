@@ -9,4 +9,9 @@ public class Play : MonoBehaviour
     {
         SceneManager.LoadScene("Character Selection");
     }
+
+    public void HowToPlay()
+    {
+        SceneManager.LoadScene("How to play");
+    }
 }

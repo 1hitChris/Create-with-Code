@@ -7,6 +7,8 @@ public class CharacterSelectionPlayer2 : MonoBehaviour
 {
     public GameObject[] characters2;
     public int selectedCharacter2 = 0;
+    public GameObject[] description;
+    public int selectedDescription = 0;
 
     public void NextCharacter()
     {
@@ -16,7 +18,10 @@ public class CharacterSelectionPlayer2 : MonoBehaviour
         selectedCharacter2 = (selectedCharacter2 + 1) % characters2.Length;
         //Set the next character display to true
         characters2[selectedCharacter2].SetActive(true);
-        Debug.Log("Next Character");
+        
+        description[selectedDescription].SetActive(false);
+        selectedDescription = (selectedDescription + 1) % description.Length;
+        description[selectedDescription].SetActive(true);
     }
 
     public void PrevoiusCharacter()
@@ -28,7 +33,14 @@ public class CharacterSelectionPlayer2 : MonoBehaviour
             selectedCharacter2 += characters2.Length;
         }
         characters2[selectedCharacter2].SetActive(true);
-        Debug.Log("Previous Character");
+
+        description[selectedDescription].SetActive(false);
+        selectedDescription--;
+        if (selectedDescription < 0)
+        {
+            selectedDescription += description.Length;
+        }
+        description[selectedDescription].SetActive(true);
     }
 
     public void StartGame()
