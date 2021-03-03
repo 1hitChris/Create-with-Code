@@ -240,7 +240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: f9cc73c797712d8408cd5758c0232d78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1024
   m_GroundCheck: {fileID: 224718668438862540}
   m_CeilingCheck: {fileID: 1167118536726986592}
   m_CrouchDisableCollider: {fileID: 0}
@@ -311,6 +311,8 @@ MonoBehaviour:
   animator: {fileID: 1167661526580146141}
   speed: 10
   boundary: 2
+  landingFxPrefab: {fileID: 1755346447508558342, guid: d2292bd6d0b841e40ac1407681caf489,
+    type: 3}
 --- !u!114 &7654046306852041369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +329,7 @@ MonoBehaviour:
   heartPrefab: {fileID: 906406501308623974, guid: ca8a0b05c8e205c44985b51448bff1a4,
     type: 3}
   throwSound: {fileID: 8300000, guid: 487f542b1a6da274c8ce8f99dc67d7e8, type: 3}
+  animator: {fileID: 1167661526580146141}
   maxHearts: 3
   currentHearts: 0
   attackSpeed: 3
@@ -434,9 +437,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184950885282273103}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f5e4f4fe3b8f99d43b0cf9ee348054ea, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4f9dfdcf53c1c8449759442dc364b1f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -458,6 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpSound: {fileID: 0}
+  heartPickUp: {fileID: 4110322353325886416, guid: da3617dcc03670c47b6714a0d1850032,
+    type: 3}
 --- !u!114 &2247137043840132803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,14 +476,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement2: {fileID: 8760713453704848367}
+  animator: {fileID: 1167661526580146141}
   startingAffection: 0
+  halfAffection: 5
   currentAffection: 0
   maxAffection: 10
+  playerStunned: 0
   stunDuration: 3
   gameManager: {fileID: 0}
   healthBar: {fileID: 0}
   heartBig: {fileID: 0}
   winScript: {fileID: 0}
+  stunSound: {fileID: 8300000, guid: fc08b7893fe56c540af9c15c5be09006, type: 3}
+  winSound: {fileID: 0}
 --- !u!114 &114855108305596312
 MonoBehaviour:
   m_ObjectHideFlags: 0

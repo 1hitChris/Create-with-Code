@@ -7,6 +7,13 @@ public class PowerUp : MonoBehaviour
     public float multiplier = 2f;
     public float powerUpDuration = 5;
     public GameObject pickupEffect;
+    private AudioSource playerAudio;
+    public AudioClip pickUpSound;
+
+    private void Start()
+    {
+        playerAudio = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,6 +29,8 @@ public class PowerUp : MonoBehaviour
 
     IEnumerator PickUpP1(Collider2D player)
     {
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+        playerAudio.PlayOneShot(pickUpSound, 5f);
         PlayerMovement speedUp = player.GetComponent<PlayerMovement>();
         speedUp.speed *= multiplier;
         GetComponent<SpriteRenderer>().enabled = false;
@@ -32,6 +41,8 @@ public class PowerUp : MonoBehaviour
     }
     IEnumerator PickUpP2(Collider2D player)
     {
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+        playerAudio.PlayOneShot(pickUpSound, 5f);
         Player2Movement speedUp = player.GetComponent<Player2Movement>();
         speedUp.speed *= multiplier;
         GetComponent<SpriteRenderer>().enabled = false;

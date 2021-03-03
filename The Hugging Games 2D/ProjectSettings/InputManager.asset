@@ -60,7 +60,7 @@ InputManager:
     negativeButton: 
     positiveButton: f
     altNegativeButton: 
-    altPositiveButton: space
+    altPositiveButton: left ctrl
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -73,8 +73,8 @@ InputManager:
     m_Name: Fire2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: right ctrl
-    positiveButton: 
+    negativeButton: 
+    positiveButton: right ctrl
     altNegativeButton: 
     altPositiveButton: '[0]'
     gravity: 1000

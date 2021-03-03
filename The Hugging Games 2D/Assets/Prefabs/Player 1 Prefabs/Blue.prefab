@@ -79,6 +79,8 @@ GameObject:
   - component: {fileID: 1797094194450734616}
   - component: {fileID: 3452238721143807226}
   - component: {fileID: 1847359612}
+  - component: {fileID: 95958837313333974}
+  - component: {fileID: 114292018432882384}
   m_Layer: 8
   m_Name: Blue
   m_TagString: Player
@@ -143,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 9cd495ad64e29de4c8097657d71f9dc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -311,13 +313,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 1645826937798716167}
+  animator: {fileID: 95958837313333974}
   startingAffection: 0
   currentAffection: 0
+  halfAffection: 5
   maxAffection: 10
+  playerStunned: 0
   stunDuration: 3
   healthBar: {fileID: 0}
   heartBig: {fileID: 0}
   winScript: {fileID: 0}
+  stunSound: {fileID: 8300000, guid: fc08b7893fe56c540af9c15c5be09006, type: 3}
+  winSound: {fileID: 8300000, guid: fa242d71aa0c1bc40a4773ec508e7f3e, type: 3}
 --- !u!114 &4860461013014722045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +343,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1024
   m_GroundCheck: {fileID: 8433831837274072336}
   m_CeilingCheck: {fileID: 3483825784582542378}
   m_CrouchDisableCollider: {fileID: 0}
@@ -374,9 +381,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4860461013014722045}
-  animator: {fileID: 0}
+  animator: {fileID: 95958837313333974}
   speed: 10
   boundary: 2
+  landingFxPrefab: {fileID: 1755346447508558342, guid: d2292bd6d0b841e40ac1407681caf489,
+    type: 3}
 --- !u!114 &1797094194450734616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a090e51fe08a314c8a5a484a0113c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 8300000, guid: 7dbbf09fc1238c14ba56fd14c528b10f, type: 3}
+  pickUpSound: {fileID: 0}
+  heartPickUp: {fileID: 4110322353325886416, guid: da3617dcc03670c47b6714a0d1850032,
+    type: 3}
 --- !u!114 &3452238721143807226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +417,7 @@ MonoBehaviour:
   heartPrefab: {fileID: 906406501308623974, guid: ca8a0b05c8e205c44985b51448bff1a4,
     type: 3}
   throwSound: {fileID: 8300000, guid: 487f542b1a6da274c8ce8f99dc67d7e8, type: 3}
+  animator: {fileID: 95958837313333974}
   maxHearts: 3
   currentHearts: 0
   attackSpeed: 3
@@ -422,6 +434,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2799288499032029190}
+--- !u!95 &95958837313333974
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799288499032029190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4f9dfdcf53c1c8449759442dc364b1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114292018432882384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799288499032029190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efe860ae589f2e49b479dfc56443f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300024, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300026, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300002, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300004, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300006, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300008, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300010, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300020, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300022, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300032, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300034, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300036, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300038, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300040, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300012, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300014, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300016, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300018, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300028, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300030, guid: 61cb757dfb9db2a428dec09b4def07d3, type: 3}
+  - {fileID: 21300000, guid: c0b787ff7b9e44744b50fc9dc9877ca3, type: 3}
+  - {fileID: 21300002, guid: c0b787ff7b9e44744b50fc9dc9877ca3, type: 3}
+  - {fileID: 21300004, guid: c0b787ff7b9e44744b50fc9dc9877ca3, type: 3}
 --- !u!1 &5274299886746370842
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2436203529630108400
 Transform:
   m_ObjectHideFlags: 0

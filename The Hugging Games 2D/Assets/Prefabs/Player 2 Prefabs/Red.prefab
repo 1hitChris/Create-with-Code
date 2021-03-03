@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 3053787876774375195}
   - component: {fileID: 4874701528273293399}
   - component: {fileID: 114324531534085856}
+  - component: {fileID: 114199378971086976}
   m_Layer: 8
   m_Name: Red
   m_TagString: Player2
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: b329345eead43fa408bf298dd91ee528, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1024
   m_GroundCheck: {fileID: 6894264376141054408}
   m_CeilingCheck: {fileID: 4024977666160165698}
   m_CrouchDisableCollider: {fileID: 0}
@@ -281,6 +282,8 @@ MonoBehaviour:
   animator: {fileID: 3973113754991355065}
   speed: 10
   boundary: 2
+  landingFxPrefab: {fileID: 1755346447508558342, guid: d2292bd6d0b841e40ac1407681caf489,
+    type: 3}
 --- !u!114 &2154191041850301342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +300,7 @@ MonoBehaviour:
   heartPrefab: {fileID: 906406501308623974, guid: ca8a0b05c8e205c44985b51448bff1a4,
     type: 3}
   throwSound: {fileID: 8300000, guid: 487f542b1a6da274c8ce8f99dc67d7e8, type: 3}
+  animator: {fileID: 3973113754991355065}
   maxHearts: 3
   currentHearts: 0
   attackSpeed: 3
@@ -404,9 +408,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696945045860104072}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f5e4f4fe3b8f99d43b0cf9ee348054ea, type: 2}
+  m_Controller: {fileID: 9100000, guid: b4f9dfdcf53c1c8449759442dc364b1f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -428,6 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpSound: {fileID: 0}
+  heartPickUp: {fileID: 0}
 --- !u!114 &4874701528273293399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,14 +446,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement2: {fileID: 4714382088012401981}
+  animator: {fileID: 3973113754991355065}
   startingAffection: 0
+  halfAffection: 5
   currentAffection: 0
   maxAffection: 10
+  playerStunned: 0
   stunDuration: 3
   gameManager: {fileID: 0}
   healthBar: {fileID: 0}
   heartBig: {fileID: 0}
   winScript: {fileID: 0}
+  stunSound: {fileID: 8300000, guid: fc08b7893fe56c540af9c15c5be09006, type: 3}
+  winSound: {fileID: 0}
 --- !u!114 &114324531534085856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +472,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1696945045860104072}
+--- !u!114 &114199378971086976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696945045860104072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efe860ae589f2e49b479dfc56443f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300002, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300004, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300006, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300008, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300010, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300020, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300022, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300032, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300034, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300036, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300038, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300040, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300000, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300024, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300030, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300012, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300014, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300016, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300018, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300026, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300028, guid: bc2eb55e451545e4294b6a3f16b82643, type: 3}
+  - {fileID: 21300000, guid: b56b565ac964a294b8e312ec6be71557, type: 3}
+  - {fileID: 21300002, guid: b56b565ac964a294b8e312ec6be71557, type: 3}
+  - {fileID: 21300004, guid: b56b565ac964a294b8e312ec6be71557, type: 3}
 --- !u!1 &2463388941993287028
 GameObject:
   m_ObjectHideFlags: 0

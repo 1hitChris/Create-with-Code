@@ -9,9 +9,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] affectionDown;
     private float spawnRangeX = 2f;
     private float spawnRangeYBottom = -0.86f;
-    private float spawnRangeYTop = 0.66f;
-    private float startDelay = 5;
-    private float spawnInterval = 5;
+    private float spawnRangeYTop = 0.37f;
+    private float startDelay = 3;
+    private float spawnInterval = 3;
     private float shieldStartDelay;
     private float shieldInterval;
     private float controllerDelay;

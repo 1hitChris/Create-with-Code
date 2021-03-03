@@ -10,14 +10,20 @@ public class Player2Movement : MonoBehaviour
     public float boundary = 2f;
     float horizontalMove = 0f;
     bool jump = false;
+    public GameObject landingFxPrefab;
+    private Rigidbody2D rb;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     // Update is called once per frame
     void Update()
     {
         // Get player movement
         horizontalMove = Input.GetAxisRaw("HorizontalP2") * speed;
 
-        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
         if (transform.position.x < -boundary)
         {
@@ -41,6 +47,12 @@ public class Player2Movement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+        if (transform.position.y < -0.2f && rb.velocity.y < 0)
+        {
+            Vector3 landingPos = new Vector3(transform.position.x + rb.velocity.x * Time.deltaTime * 3, -0.71f, 0);
+
+            Instantiate(landingFxPrefab, landingPos, Quaternion.identity);
+        }
     }
 
     void FixedUpdate()

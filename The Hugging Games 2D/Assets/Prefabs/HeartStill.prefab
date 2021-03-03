@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 893aca52568245f41af1f0eb53cbb3f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,7 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a090e51fe08a314c8a5a484a0113c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 8300000, guid: 7dbbf09fc1238c14ba56fd14c528b10f, type: 3}
+  pickUpSound: {fileID: 8300000, guid: 514337b6b3f8f6c4a8c512d418a46d59, type: 3}
+  heartPickUp: {fileID: 4110322353325886416, guid: da3617dcc03670c47b6714a0d1850032,
+    type: 3}
 --- !u!114 &114965869237175666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a12050456ca504da51a7138f418a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 8300000, guid: 7dbbf09fc1238c14ba56fd14c528b10f, type: 3}
+  pickUpSound: {fileID: 8300000, guid: 514337b6b3f8f6c4a8c512d418a46d59, type: 3}
+  heartPickUp: {fileID: 4110322353325886416, guid: da3617dcc03670c47b6714a0d1850032,
+    type: 3}
 --- !u!50 &8555148857110816900
 Rigidbody2D:
   serializedVersion: 4

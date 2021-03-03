@@ -8,6 +8,8 @@ public class HeartThrowP2 : MonoBehaviour
     public GameObject heartPrefab;
     private AudioSource playerAudio;
     public AudioClip throwSound;
+    public Animator animator;
+    private PlayerTwoHealth p2Health;
 
     public int maxHearts = 3;
     public int currentHearts;
@@ -16,13 +18,14 @@ public class HeartThrowP2 : MonoBehaviour
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
+        p2Health = GetComponent<PlayerTwoHealth>();
         currentHearts = 0;
     }
 
     // Start is called before the first frame update
     void Update()
     {
-        if (currentHearts <= 0)
+        if (currentHearts <= 0 || p2Health.playerStunned == true)
         {
             return;
         }
@@ -30,11 +33,11 @@ public class HeartThrowP2 : MonoBehaviour
         {
             playerAudio.PlayOneShot(throwSound, 1.0f);
             Shoot();
-            StartCoroutine(AttackSpeed());
+            animator.SetTrigger("Throw");
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         Instantiate(heartPrefab, firePoint.position, firePoint.rotation);
         currentHearts--;

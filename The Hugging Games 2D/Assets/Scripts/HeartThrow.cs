@@ -8,21 +8,23 @@ public class HeartThrow : MonoBehaviour
     public GameObject heartPrefab;
     private AudioSource playerAudio;
     public AudioClip throwSound;
-
+    public Animator animator;
     public int maxHearts = 3;
     public int currentHearts;
     public int attackSpeed = 3;
+    private PlayerOneHealth p1Health;
 
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
+        p1Health = GetComponent<PlayerOneHealth>();
         currentHearts = 0;
     }
 
     // Start is called before the first frame update
     void Update()
     {
-        if (currentHearts <= 0)
+        if (currentHearts <= 0 || p1Health.playerStunned == true)
         {
             return;
         }
@@ -30,11 +32,11 @@ public class HeartThrow : MonoBehaviour
         {
             playerAudio.PlayOneShot(throwSound, 1.0f);
             Shoot();
-            StartCoroutine(AttackSpeed(attackSpeed));
+            animator.SetTrigger("Throw");
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         Instantiate(heartPrefab, firePoint.position, firePoint.rotation);
         currentHearts--;

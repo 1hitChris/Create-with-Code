@@ -5,16 +5,24 @@ using UnityEngine;
 public class PlayerTwoHealth : MonoBehaviour
 {
     public Player2Movement movement2;
+    public Animator animator;
+    private HeartThrowP2 heartThrow;
     public int startingAffection = 0;
+    public int halfAffection = 5;
     public int currentAffection;
     public int maxAffection = 10;
-    bool playerStunned = false;
+    public bool playerStunned = false;
     public int stunDuration = 3;
     public GameManager gameManager;
     public Healthbar healthBar;
     public GameObject heartBig;
     private bool waiting = false;
     public WinScript winScript;
+    private AudioSource playerAudio;
+    public AudioClip stunSound;
+    public AudioClip winSound;
+    private PlayerOneHealth p1health;
+
 
     void Start()
     {
@@ -25,11 +33,7 @@ public class PlayerTwoHealth : MonoBehaviour
         healthBar.SetMaxHealth(currentAffection);
         GameObject win2 = GameObject.Find("GameManager");
         winScript = win2.GetComponent<WinScript>();
-    }
-
-    private void Update()
-    {
-        
+        playerAudio = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damage)
@@ -44,12 +48,12 @@ public class PlayerTwoHealth : MonoBehaviour
             playerStunned = true;
             movement2.enabled = false;
             Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             Debug.Log("Stunned");
             StartCoroutine("StunDuration");
             heartBig.SetActive(true);
-           // StopTime(1.0f);
-           // Destroy(gameObject);
+            animator.SetBool("IsStunned", true);
+            playerAudio.PlayOneShot(stunSound, 1f);
         }
     }
 
@@ -68,12 +72,13 @@ public class PlayerTwoHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(stunDuration);
         movement2.enabled = true;
-        currentAffection = startingAffection;
+        currentAffection = halfAffection;
         healthBar.SetHealth(currentAffection);
         heartBig.SetActive(false);
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerStunned = false;
+        animator.SetBool("IsStunned", false);
     }
 
     public void StopTime(float duration)
@@ -99,12 +104,22 @@ public class PlayerTwoHealth : MonoBehaviour
         if (playerStunned)
         {
             Debug.Log("Hugged");
-            winScript.Player1Win();
+            movement2.enabled = false;
+
             //Play hug animation
+            collision.gameObject.GetComponent<Animator>().SetTrigger("Hug");
             //Zoom in
             //Wait 2 seconds
+            StartCoroutine("WinWait");
             //Win screen appear
         }
+    }
+
+    IEnumerator WinWait()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        winScript.Player1Win();
+        playerAudio.PlayOneShot(winSound, 1f);
     }
 }
 

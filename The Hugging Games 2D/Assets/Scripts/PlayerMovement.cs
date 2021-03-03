@@ -6,27 +6,24 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
     public Animator animator;
-    
     public float speed = 30.0f;
     public float boundary = 2f;
     float horizontalMove = 0f;
-    //float controllerMove = 0f;
     bool jump = false;
+    public GameObject landingFxPrefab;
+    private Rigidbody2D rb;
 
-    void Awake()
+    private void Start()
     {
-       
+        rb = GetComponent<Rigidbody2D>();
     }
-
     // Update is called once per frame
     void Update()
     {
         // Get player movement
         horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
-        //controllerMove = Input.GetAxisRaw("ControllerHorizontal") * speed;
 
-        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        //animator.SetFloat("Speed", Mathf.Abs(controllerMove));
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
         if (transform.position.x < -boundary)
         {
@@ -50,13 +47,18 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+        if (transform.position.y < -0.2f && rb.velocity.y < 0)
+        {
+            Vector3 landingPos = new Vector3 (transform.position.x + rb.velocity.x * Time.deltaTime * 3, -0.71f, 0);
+
+            Instantiate(landingFxPrefab, landingPos, Quaternion.identity);
+        }
     }
 
     void FixedUpdate()
     {
         // Get the controller movement for character
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
-        //controller.Move(controllerMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
 }

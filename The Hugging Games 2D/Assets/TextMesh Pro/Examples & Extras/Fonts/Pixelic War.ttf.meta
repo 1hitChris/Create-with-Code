@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4173c41856a5f6647ad3e2a97b7c4776
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pixelic War
+  fontNames:
+  - Pixelic War
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0bddc7fa9586ca844859153472523b68, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

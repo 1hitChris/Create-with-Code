@@ -59,6 +59,11 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
+		if (m_Rigidbody2D.velocity.y > 0)
+		{
+			return;
+		}
+
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -144,29 +149,6 @@ public class CharacterController2DPlayer2 : MonoBehaviour
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 			playerAudio.PlayOneShot(jumpSound, 1.0f);
-		}
-
-		if (move >= 0 || move <= 0 && m_FacingRight)
-		{
-			if (Input.GetButtonDown("Hug2") && hugAvailable == true)
-			{
-				m_Rigidbody2D.AddForce(new Vector2(hugForce, 0f));
-				Debug.Log("Hug to the right");
-				hugAvailable = false;
-
-				StartCoroutine("HugCooldown");
-
-			}
-		}
-		else if (move == 0 || move <= 0 && !m_FacingRight)
-		{
-			if (Input.GetButtonDown("Hug2") && hugAvailable == true)
-			{
-				m_Rigidbody2D.AddForce(new Vector2(-hugForce, 0f));
-				Debug.Log("Hug to the left");
-				hugAvailable = false;
-				StartCoroutine("HugCooldown");
-			}
 		}
 	}
 

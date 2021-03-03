@@ -14,4 +14,9 @@ public class Play : MonoBehaviour
     {
         SceneManager.LoadScene("How to play");
     }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }

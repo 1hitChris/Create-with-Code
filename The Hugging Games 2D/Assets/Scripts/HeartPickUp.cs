@@ -6,6 +6,7 @@ public class HeartPickUp : MonoBehaviour
 {
     private AudioSource playerAudio;
     public AudioClip pickUpSound;
+    public GameObject heartPickUp;
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
@@ -22,10 +23,19 @@ public class HeartPickUp : MonoBehaviour
             }
             else if (heartThrowScript.currentHearts < heartThrowScript.maxHearts)
             {
-                playerAudio.PlayOneShot(pickUpSound, 1.0f);
+                Instantiate(heartPickUp, transform.position, transform.rotation);
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+                playerAudio.PlayOneShot(pickUpSound, 5f);
                 heartThrowScript.currentHearts++;
-                Destroy(gameObject);
+                StartCoroutine("Wait");
             }
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Destroy(gameObject);
     }
 }
